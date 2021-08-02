@@ -13,12 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/fire', function () {
+    event(new \App\Events\StudentStaffEvent('Abdurauf'));
+});
+
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('cors');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth', 'cors'])->name('dashboard');
 
 require __DIR__.'/auth.php';

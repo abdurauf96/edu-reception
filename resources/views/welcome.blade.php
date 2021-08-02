@@ -19,6 +19,7 @@
                 font-family: 'Nunito', sans-serif;
             }
         </style>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
@@ -128,5 +129,20 @@
                 </div>
             </div>
         </div>
+
+        <script src="//{{ Request::getHost() }}:6001/socket.io/socket.io.js"> </script>
+
+        <script src="{{ asset('/js/app.js') }}"  ></script>
+
+
+            <script type="text/javascript">
+
+            window.Echo.channel('test')
+                .listen('StudentStaffEvent', (data) => {
+                    console.log(data);
+                    window.location.href = '/admin/student/12';
+                });
+        </script>
+
     </body>
 </html>
